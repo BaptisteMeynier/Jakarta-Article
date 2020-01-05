@@ -4,12 +4,14 @@ package com.meynier.jakarta.dao;
 
 import com.meynier.jakarta.domain.Person;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Stateless
+@Named
+@ApplicationScoped
 public class PersonDao {
 
     @PersistenceContext

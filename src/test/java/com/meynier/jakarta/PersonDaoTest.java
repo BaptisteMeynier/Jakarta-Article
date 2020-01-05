@@ -2,18 +2,16 @@ package com.meynier.jakarta;
 
 import com.meynier.jakarta.dao.PersonDao;
 import com.meynier.jakarta.domain.Person;
-//import org.arquillian.ape.api.UsingDataSet;
+import org.arquillian.ape.api.UsingDataSet;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import javax.ejb.EJB;
+import javax.inject.Inject;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -24,20 +22,20 @@ import static org.junit.Assert.assertThat;
 @RunWith(Arquillian.class)
 public class PersonDaoTest {
 
-    @EJB
+    @Inject
     private PersonDao personDao;
 
     @Deployment
-    public static Archive createDeployment() {
+    public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
                 .addClass(Person.class)
                 .addClass(PersonDao.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
-                .addAsResource("test-persistence.xml", "META-INF/persistence.xml");
+                .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
+                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 
     @Test
-   // @UsingDataSet("datasets/person.yml")
+    @UsingDataSet("datasets/person.yml")
     public void shouldReturnAllPerson() throws Exception {
         List<Person> personList = personDao.getAll();
 
