@@ -3,8 +3,10 @@ package com.meynier.jakarta;
 import com.meynier.jakarta.dao.PersonDao;
 import com.meynier.jakarta.domain.Person;
 import org.arquillian.ape.api.UsingDataSet;
+import org.arquillian.ape.rdbms.ShouldMatchDataSet;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.junit.InSequence;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -35,14 +37,30 @@ public class PersonDaoTest {
     }
 
     @Test
+    @InSequence(0)
     @UsingDataSet("datasets/person.yml")
     public void shouldReturnAllPerson() throws Exception {
+        //GIVEN
+        //WHEN
         List<Person> personList = personDao.getAll();
-
+        //THEN
         assertNotNull(personList);
         assertThat(personList.size(), is(1));
         assertThat(personList.get(0).getName(), is("John"));
         assertThat(personList.get(0).getLastName(), is("Malkovich"));
+    }
+
+    @Test
+    @InSequence(1)
+    @ShouldMatchDataSet(value="datasets/expected-person.yml", excludeColumns="id")
+    public void shouldPersistPerson() throws Exception {
+        //GIVEN
+        Person person = new Person();
+        person.setLastName("Antoine");
+        person.setName("Chesnoy");
+        //WHEN
+        personDao.save(person);
+        //THEN
     }
 }
 
