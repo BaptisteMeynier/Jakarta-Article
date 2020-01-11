@@ -17,8 +17,8 @@ public class PersonResourceIT {
     private final static String CONTEXT_APPLICATION = "jakarta-article";
     @Container
     public static ApplicationContainer app = new ApplicationContainer()
-            .withAppContextRoot(String.format("/%s", CONTEXT_APPLICATION))
-            .withReadinessPath(String.format("/%s/app/person",CONTEXT_APPLICATION));
+            .withAppContextRoot(CONTEXT_APPLICATION)
+            .withReadinessPath(String.format("%s/app/person",CONTEXT_APPLICATION));
 
     @RESTClient
     public static PersonResource personResource;

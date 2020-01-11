@@ -1,7 +1,5 @@
 package com.meynier.jakarta.dao;
 
-
-
 import com.meynier.jakarta.domain.Person;
 
 import javax.enterprise.context.ApplicationScoped;
