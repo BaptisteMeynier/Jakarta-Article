@@ -123,6 +123,14 @@
 
     <build>
         <finalName>jakarta-article</finalName>
+        <testResources>
+            <testResource>
+                <directory>src/arquillian-test/resources</directory>
+            </testResource>
+            <testResource>
+                <directory>src/microshed-test/resources</directory>
+            </testResource>
+        </testResources>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -140,12 +148,6 @@
                                 <source>src/arquillian-test/java</source>
                                 <source>src/microshed-test/java</source>
                             </sources>
-                            <resources>
-                                <resource>
-                                    <directory>src/arquillian-test/resources</directory>
-                                    <directory>src/microshed-test/resources</directory>
-                                </resource>
-                            </resources>
                         </configuration>
                     </execution>
                 </executions>
