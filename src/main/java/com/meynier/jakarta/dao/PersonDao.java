@@ -16,8 +16,16 @@ public class PersonDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    public PersonDao(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     public List<Person> getAll() {
         return entityManager.createNamedQuery("Person.getAll", Person.class).getResultList();
+    }
+
+    public List<Person> getAllNativeVersion() {
+        return entityManager.createNativeQuery("select * from Person", Person.class).getResultList();
     }
 
     @Transactional
