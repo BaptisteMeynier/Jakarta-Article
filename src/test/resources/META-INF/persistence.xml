@@ -5,8 +5,7 @@
              version="2.1">
 
     <persistence-unit name="JPADemo" transaction-type="RESOURCE_LOCAL">
-
-        <description>Hibernate test case template Persistence Unit</description>
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>com.meynier.jakarta.domain.Person</class>
         <properties>
             <!-- Configuring The Database Connection Details -->

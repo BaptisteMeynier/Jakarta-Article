@@ -39,13 +39,13 @@ public class PersistenceTest {
     @Test
     public void it_should_get_person_native() throws Exception {
         List<Person> all = personDao.getAllNativeVersion();
-        assertThat(all.size(),is(3));
+        assertThat(all.size(), is(3));
     }
 
     @Test
     public void it_should_get_person() throws Exception {
         List<Person> all = personDao.getAll();
-        assertThat(all.size(),is(3));
+        assertThat(all.size(), is(3));
     }
 
 }
