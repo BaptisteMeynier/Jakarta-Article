@@ -14,8 +14,12 @@ import java.util.List;
 @ApplicationScoped
 public class PersonDao {
 
+
     @PersistenceContext
     private EntityManager entityManager;
+
+    public PersonDao() {
+    }
 
     @Inject
     public PersonDao(EntityManager entityManager) {
