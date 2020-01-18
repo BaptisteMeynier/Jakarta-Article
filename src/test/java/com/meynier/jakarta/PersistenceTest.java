@@ -16,7 +16,7 @@ import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-@DisplayName("Programmaticaly Unit Tests")
+@DisplayName("Programmaticaly Persistence Unit Tests")
 public class PersistenceTest {
 
     private static EntityManagerFactory entityManagerFactory;

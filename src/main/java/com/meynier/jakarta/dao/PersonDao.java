@@ -3,6 +3,7 @@ package com.meynier.jakarta.dao;
 import com.meynier.jakarta.domain.Person;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,6 +17,7 @@ public class PersonDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Inject
     public PersonDao(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
