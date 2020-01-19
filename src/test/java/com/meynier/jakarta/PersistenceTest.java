@@ -3,15 +3,14 @@ package com.meynier.jakarta;
 
 import com.meynier.jakarta.dao.PersonDao;
 import com.meynier.jakarta.domain.Person;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.Ignore;
+import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
+import java.util.Properties;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -25,7 +24,9 @@ public class PersistenceTest {
 
     @BeforeAll
     public static void setUpBeforeClass() throws Exception {
-        entityManagerFactory = Persistence.createEntityManagerFactory("JPADemo");
+        Properties properties = new Properties();
+        properties.put("eclipselink.persistencexml","META-INF/persistence-h2.xml");
+        entityManagerFactory = Persistence.createEntityManagerFactory("JPADemo", properties);
         entityManager = entityManagerFactory.createEntityManager();
         personDao = new PersonDao(entityManager);
     }

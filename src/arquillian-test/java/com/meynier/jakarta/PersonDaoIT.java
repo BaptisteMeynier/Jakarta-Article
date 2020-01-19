@@ -1,5 +1,6 @@
 package com.meynier.jakarta;
 
+import com.meynier.jakarta.config.EntityManagerConfigurator;
 import com.meynier.jakarta.dao.PersonDao;
 import com.meynier.jakarta.domain.Person;
 import org.arquillian.ape.api.UsingDataSet;
@@ -10,7 +11,6 @@ import org.jboss.arquillian.junit.InSequence;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -32,6 +32,7 @@ public class PersonDaoIT {
         return ShrinkWrap.create(WebArchive.class)
                 .addClass(Person.class)
                 .addClass(PersonDao.class)
+                .addClass(EntityManagerConfigurator.class)
                 .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
     }

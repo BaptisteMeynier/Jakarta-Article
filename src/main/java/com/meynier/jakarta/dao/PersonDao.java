@@ -6,7 +6,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -15,15 +14,15 @@ import java.util.List;
 public class PersonDao {
 
 
-    @PersistenceContext
     private EntityManager entityManager;
 
-    public PersonDao() {
-    }
 
     @Inject
     public PersonDao(EntityManager entityManager) {
         this.entityManager = entityManager;
+    }
+
+    public PersonDao() {
     }
 
     public List<Person> getAll() {

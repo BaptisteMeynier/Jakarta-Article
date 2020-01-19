@@ -5,9 +5,14 @@ import com.meynier.jakarta.service.SampleService;
 import com.meynier.jakarta.utils.EntityManagerHK2Factory;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
+import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import javax.inject.Singleton;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
