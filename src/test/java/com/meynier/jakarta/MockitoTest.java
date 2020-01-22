@@ -3,12 +3,10 @@ package com.meynier.jakarta;
 import com.meynier.jakarta.dao.PersonDao;
 import com.meynier.jakarta.domain.Person;
 import com.meynier.jakarta.service.SampleService;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
@@ -23,9 +21,10 @@ public class MockitoTest {
     @InjectMocks
     private SampleService sampleService;
 
+    @Mock PersonDao personDao;
 
     @Test
-    public void should_get_persons_by_name(@Mock PersonDao personDao){
+    public void should_get_persons_by_name(){
         //GIVEN
         String name="Bernard";
 
