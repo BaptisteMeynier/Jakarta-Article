@@ -1,6 +1,7 @@
 package com.meynier.jakarta;
 
 import com.meynier.jakarta.dao.PersonDao;
+import com.meynier.jakarta.domain.Person;
 import com.meynier.jakarta.service.SampleService;
 import com.meynier.jakarta.utils.EntityManagerHK2Factory;
 import org.glassfish.hk2.api.ServiceLocator;
@@ -14,6 +15,8 @@ import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -23,21 +26,29 @@ public class InjectionTest {
     private static ServiceLocator serviceLocator;
 
     @BeforeAll
-    public static void setUpBeforeClass() throws Exception {
+    public static void setUpBeforeClass() {
         serviceLocator = ServiceLocatorUtilities.createAndPopulateServiceLocator();
         ServiceLocatorUtilities.addClasses(serviceLocator, EntityManagerHK2Factory.class, SampleService.class, PersonDao.class);
     }
 
     @Test
-    public void it_should_call_service() throws Exception {
+    public void it_should_call_service() {
+        //GIVEN
         SampleService foo = serviceLocator.getService(SampleService.class);
-        assertThat(foo.sayHello(),is("Hello World"));
+        //WHEN
+        String greeting = foo.sayHello();
+        //THEN
+        assertThat(greeting, is("Hello World"));
     }
 
     @Test
-    public void it_should_initialize_entityManager() throws Exception {
+    public void it_should_initialize_entityManager() {
+        //GIVEN
         PersonDao foo = serviceLocator.getService(PersonDao.class);
-        assertThat(foo.getAll().size(),is(3));
+        //WHEN
+        List<Person> all = foo.getAll();
+        //THEN
+        assertThat(all.size(),is(3));
     }
 
 
