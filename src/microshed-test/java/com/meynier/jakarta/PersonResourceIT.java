@@ -7,7 +7,6 @@ import org.microshed.testing.jupiter.MicroShedTest;
 import org.microshed.testing.testcontainers.ApplicationContainer;
 import org.testcontainers.junit.jupiter.Container;
 
-import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -15,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class PersonResourceIT {
 
     private final static String CONTEXT_APPLICATION = "jakarta-article";
+
     @Container
     public static ApplicationContainer app = new ApplicationContainer()
             .withAppContextRoot(CONTEXT_APPLICATION)
@@ -24,12 +24,10 @@ public class PersonResourceIT {
     public static PersonResource personResource;
 
     @Test
-    public void sayHello() throws IOException {
+    public void sayHello() {
         String data = personResource.getPerson();
 
         assertTrue(data.startsWith("Hello World"));
-        System.out.println(data);
-
     }
 
 }

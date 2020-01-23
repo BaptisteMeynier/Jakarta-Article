@@ -12,12 +12,9 @@ import java.util.List;
 @ApplicationScoped
 public class SampleService {
 
+    @Inject
     private PersonDao personDao;
 
-    @Inject
-    public SampleService(PersonDao personDao) {
-        this.personDao = personDao;
-    }
 
     public String sayHello(){
         return "Hello World";
