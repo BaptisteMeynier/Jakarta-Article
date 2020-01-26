@@ -16,9 +16,8 @@ public class PersonResourceIT {
     private final static String CONTEXT_APPLICATION = "jakarta-article";
 
     @Container
-    public static ApplicationContainer app = new ApplicationContainer("payara/micro:jdk11")
-          //  .withAppContextRoot(CONTEXT_APPLICATION)
-            .withReadinessPath("/app/person");
+    public static ApplicationContainer app = new ApplicationContainer("jakarta-article:1.0.0")
+            .withAppContextRoot(CONTEXT_APPLICATION);
 
     @RESTClient
     public static PersonResource personResource;
