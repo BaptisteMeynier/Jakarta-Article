@@ -1,19 +1,13 @@
 package com.meynier.jakarta;
 
-import com.meynier.jakarta.dao.PersonDao;
-import com.meynier.jakarta.domain.Person;
-import com.meynier.jakarta.service.SampleService;
+import com.meynier.jakarta.domain.Fish;
+import com.meynier.jakarta.service.FishService;
 import com.meynier.jakarta.utils.EntityManagerHK2Factory;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
-import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import javax.inject.Singleton;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 import java.util.List;
 
@@ -28,13 +22,13 @@ public class InjectionTest {
     @BeforeAll
     public static void setUpBeforeClass() {
         serviceLocator = ServiceLocatorUtilities.createAndPopulateServiceLocator();
-        ServiceLocatorUtilities.addClasses(serviceLocator, EntityManagerHK2Factory.class, SampleService.class, PersonDao.class);
+        ServiceLocatorUtilities.addClasses(serviceLocator, EntityManagerHK2Factory.class, FishService.class, PersonDao.class);
     }
 
     @Test
     public void it_should_call_service() {
         //GIVEN
-        SampleService foo = serviceLocator.getService(SampleService.class);
+        FishService foo = serviceLocator.getService(FishService.class);
         //WHEN
         String greeting = foo.sayHello();
         //THEN
@@ -46,7 +40,7 @@ public class InjectionTest {
         //GIVEN
         PersonDao foo = serviceLocator.getService(PersonDao.class);
         //WHEN
-        List<Person> all = foo.getAll();
+        List<Fish> all = foo.getAll();
         //THEN
         assertThat(all.size(),is(3));
     }

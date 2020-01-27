@@ -1,9 +1,7 @@
 package com.meynier.jakarta;
 
 
-import com.meynier.jakarta.dao.PersonDao;
-import com.meynier.jakarta.domain.Person;
-import org.junit.Ignore;
+import com.meynier.jakarta.domain.Fish;
 import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManager;
@@ -39,13 +37,13 @@ public class PersistenceTest {
 
     @Test
     public void it_should_get_person_native() throws Exception {
-        List<Person> all = personDao.getAllNativeVersion();
+        List<Fish> all = personDao.getAllNativeVersion();
         assertThat(all.size(), is(3));
     }
 
     @Test
     public void it_should_get_person() throws Exception {
-        List<Person> all = personDao.getAll();
+        List<Fish> all = personDao.getAll();
         assertThat(all.size(), is(3));
     }
 

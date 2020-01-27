@@ -2,7 +2,6 @@ package com.meynier.jakarta.config;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
-import javax.inject.Singleton;
 import javax.persistence.*;
 
 @ApplicationScoped
