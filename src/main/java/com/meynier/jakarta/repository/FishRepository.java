@@ -1,6 +1,8 @@
 package com.meynier.jakarta.repository;
 
+import com.meynier.jakarta.domain.Family;
 import com.meynier.jakarta.domain.Fish;
+import com.meynier.jakarta.domain.Shop;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -33,27 +35,36 @@ public class FishRepository {
         return entityManager.createNativeQuery("select * from Person", Fish.class).getResultList();
     }
 
-    public List<Fish> getAll() {
-        return entityManager.createNamedQuery("Person.getAll", Fish.class).getResultList();
-    }
-
-    public List<Fish> findByName(final String name) {
-        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Fish> listCriteria = builder.createQuery(Fish.class);
-        Root<Fish> listRoot = listCriteria.from(Fish.class);
-        listCriteria.select(listRoot).where(builder.equal(listRoot.get("name"),name));
-        TypedQuery<Fish> query = entityManager.createQuery(listCriteria);
-        return query.getResultList();
-    }
-
     @Transactional
-    public void save(final Fish person){
+    public void save(final Fish person) {
         entityManager.persist(person);
     }
 
     public int countByType(String fishFamily) {
         return entityManager.createNamedQuery("Fish.countByFamily", Integer.class)
-                .setParameter("familyName",fishFamily)
+                .setParameter("familyName", fishFamily)
                 .getSingleResult();
+    }
+
+    public void addFish(Shop shop, Family fishFamily) {
+        Fish fish = new Fish();
+        fish.setFamily(fishFamily);
+        fish.setShop(shop);
+        entityManager.persist(fish);
+    }
+
+    public void deleteFish(Shop shop, Family fishFamily) {
+        Fish fish = (Fish) entityManager.createNativeQuery(
+                "select * " +
+                        "from Fish fi join Family fa on fi.family_id = fa.family_id " +
+                        "where " +
+                        "fa.family_name = :familyName" +
+                        "fa.family_name = :shopName",
+                Fish.class)
+                .setParameter("familyName", fishFamily)
+                .setParameter("shopName", shop.getName())
+                .setMaxResults(1)
+                .getSingleResult();
+        entityManager.remove(fish);
     }
 }

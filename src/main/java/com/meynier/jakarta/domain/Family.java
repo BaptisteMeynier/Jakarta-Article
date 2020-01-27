@@ -1,6 +1,6 @@
 package com.meynier.jakarta.domain;
 
-import com.meynier.jakarta.domain.enums.Diet;
+import com.meynier.jakarta.domain.enums.WaterType;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +21,7 @@ public class Family {
     @NotBlank
     private String name;
     @NotNull
-    private Diet diet;
+    private WaterType waterType;
     @Positive
     private int temperature;
     @Positive
@@ -45,14 +45,6 @@ public class Family {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Diet getDiet() {
-        return diet;
-    }
-
-    public void setDiet(Diet diet) {
-        this.diet = diet;
     }
 
     public int getTemperature() {
@@ -79,8 +71,7 @@ public class Family {
         return id == family.id &&
                 temperature == family.temperature &&
                 Float.compare(family.price, price) == 0 &&
-                Objects.equals(name, family.name) &&
-                diet == family.diet;
+                Objects.equals(name, family.name);
     }
 
     @Override
@@ -88,7 +79,6 @@ public class Family {
         return "Family{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", diet=" + diet +
                 ", temperature=" + temperature +
                 ", price=" + price +
                 '}';
@@ -96,6 +86,6 @@ public class Family {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, diet, temperature, price);
+        return Objects.hash(id, name, temperature, price);
     }
 }

@@ -1,8 +1,6 @@
 package com.meynier.jakarta.domain;
 
 
-import com.meynier.jakarta.domain.enums.Gender;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
@@ -18,8 +16,6 @@ public class Fish {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private long id;
-    @NotNull
-    private Gender gender;
     @NotNull
     private Family family;
     @NotNull
@@ -37,13 +33,6 @@ public class Fish {
         this.id = id;
     }
 
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
 
     public Family getFamily() {
         return family;
@@ -65,7 +54,6 @@ public class Fish {
     public String toString() {
         return "Fish{" +
                 "id=" + id +
-                ", gender=" + gender +
                 ", family=" + family +
                 ", shop=" + shop +
                 '}';
@@ -77,13 +65,12 @@ public class Fish {
         if (o == null || getClass() != o.getClass()) return false;
         Fish fish = (Fish) o;
         return id == fish.id &&
-                gender == fish.gender &&
                 Objects.equals(family, fish.family) &&
                 Objects.equals(shop, fish.shop);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, gender, family, shop);
+        return Objects.hash(id, family, shop);
     }
 }

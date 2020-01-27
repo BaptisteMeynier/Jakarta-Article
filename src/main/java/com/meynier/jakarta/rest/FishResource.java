@@ -28,7 +28,7 @@ public class FishResource {
     }
 
     @DELETE
-    public String sell(@NotBlank String fishFamily) {
-        return fishService.sell();
+    public Response sell(@NotBlank String fishFamily) {
+        return fishService.sell(fishFamily);
     }
 }
