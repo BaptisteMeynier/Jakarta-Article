@@ -2,6 +2,7 @@ package com.meynier.jakarta.service;
 
 import com.meynier.jakarta.domain.Family;
 import com.meynier.jakarta.domain.Shop;
+import com.meynier.jakarta.exception.NotEnoughFish;
 import com.meynier.jakarta.exception.NotEnoughMoneyException;
 import com.meynier.jakarta.repository.FamilyRepository;
 import com.meynier.jakarta.repository.FishRepository;
@@ -26,10 +27,6 @@ public class FishService {
     @Inject
     private FamilyRepository familyRepository;
 
-    public List<Fish> findByName(final String name){
-        return fishRepository.findByName(name);
-    }
-
     public int countByType(String fishFamily) {
         return fishRepository.countByType(fishFamily);
     }
@@ -48,6 +45,13 @@ public class FishService {
 
     public void sell(String fishFamily) {
         Family family = familyRepository.findByName(fishFamily);
-fishRepository.
+        if(family.getFishs().isEmpty()){
+            throw new NotEnoughFish();
+        }
+        Shop shop = shopRepository.findMainShop();
+        float account = shop.getAccount();
+        shop.setAccount(account + family.getPrice());
+        shopRepository.save(shop);
+        fishRepository.sellFish(fishFamily);
     }
 }

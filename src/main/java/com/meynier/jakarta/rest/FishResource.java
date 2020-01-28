@@ -29,6 +29,7 @@ public class FishResource {
 
     @DELETE
     public Response sell(@NotBlank String fishFamily) {
-        return fishService.sell(fishFamily);
+        fishService.sell(fishFamily);
+        return Response.ok().build();
     }
 }

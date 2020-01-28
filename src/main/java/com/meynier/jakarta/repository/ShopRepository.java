@@ -23,4 +23,8 @@ public class ShopRepository {
         shop.setAccount(shop.getAccount() - total);
         entityManager.persist(shop);
     }
+
+    public void save(Shop shop) {
+        entityManager.persist(shop);
+    }
 }

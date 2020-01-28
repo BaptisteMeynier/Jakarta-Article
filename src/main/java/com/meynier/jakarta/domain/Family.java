@@ -2,14 +2,12 @@ package com.meynier.jakarta.domain;
 
 import com.meynier.jakarta.domain.enums.WaterType;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -27,6 +25,8 @@ public class Family {
     @Positive
     @DecimalMin("0.3")
     private float price;
+    @OneToMany
+    private Collection<Fish> fishs;
 
     public Family() {
     }
@@ -47,6 +47,14 @@ public class Family {
         this.name = name;
     }
 
+    public WaterType getWaterType() {
+        return waterType;
+    }
+
+    public void setWaterType(WaterType waterType) {
+        this.waterType = waterType;
+    }
+
     public int getTemperature() {
         return temperature;
     }
@@ -63,6 +71,14 @@ public class Family {
         this.price = price;
     }
 
+    public Collection<Fish> getFishs() {
+        return fishs;
+    }
+
+    public void setFishs(Collection<Fish> fishs) {
+        this.fishs = fishs;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,7 +87,14 @@ public class Family {
         return id == family.id &&
                 temperature == family.temperature &&
                 Float.compare(family.price, price) == 0 &&
-                Objects.equals(name, family.name);
+                Objects.equals(name, family.name) &&
+                waterType == family.waterType &&
+                Objects.equals(fishs, family.fishs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, waterType, temperature, price, fishs);
     }
 
     @Override
@@ -79,13 +102,11 @@ public class Family {
         return "Family{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", waterType=" + waterType +
                 ", temperature=" + temperature +
                 ", price=" + price +
+                ", fishs=" + fishs +
                 '}';
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, temperature, price);
-    }
 }
+

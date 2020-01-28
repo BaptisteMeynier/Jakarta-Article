@@ -67,4 +67,10 @@ public class FishRepository {
                 .getSingleResult();
         entityManager.remove(fish);
     }
+
+    public void sellFish(String fishFamily) {
+        entityManager.createNamedQuery("delete from Fish where id = (select max(id) from Fish) and family_id=:fishFamily")
+                .setParameter("fishFamily", fishFamily)
+                .getSingleResult();
+    }
 }
