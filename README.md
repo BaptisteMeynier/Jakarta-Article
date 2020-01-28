@@ -5,3 +5,6 @@ http://florent-dupont.blogspot.com/2014/01/arquillian-jpa-et-datasets-22-utilise
 sudo systemctl start docker
 
 docker build -t jakarta-article:1.0.0 -f src/microshed-test/docker/Dockerfile .
+
+NEXT EXCEPTION MAPPER
+CDI EVENT

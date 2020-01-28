@@ -4,17 +4,12 @@ import com.meynier.jakarta.domain.Family;
 import com.meynier.jakarta.domain.Shop;
 import com.meynier.jakarta.exception.NotEnoughFish;
 import com.meynier.jakarta.exception.NotEnoughMoneyException;
-import com.meynier.jakarta.repository.FamilyRepository;
-import com.meynier.jakarta.repository.FishRepository;
-import com.meynier.jakarta.domain.Fish;
 import com.meynier.jakarta.repository.ShopRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
-import javax.ws.rs.core.Response;
-import java.util.List;
 
 @Named
 @ApplicationScoped
@@ -22,36 +17,30 @@ public class FishService {
 
     @Inject
     private ShopRepository shopRepository;
-    @Inject
-    private FishRepository fishRepository;
-    @Inject
-    private FamilyRepository familyRepository;
 
     public int countByType(String fishFamily) {
-        return fishRepository.countByType(fishFamily);
+        return shopRepository.countFishByFamily(fishFamily);
     }
 
     @Transactional
     public void buy(String fishFamily, int quantity) {
-        Family family = familyRepository.findByName(fishFamily);
+        Family family = shopRepository.findFamilyByName(fishFamily);
         Shop shop = shopRepository.findMainShop();
-        float total = family.getPrice() * quantity;
-        if(total > shop.getAccount()){
+        float price = family.getPrice() * quantity;
+        if(price > shop.getAccount()){
             throw new NotEnoughMoneyException();
         }
-        shopRepository.spend(shop,total);
-        fishRepository.addFish(shop, family);
+        shopRepository.moneyTransaction(shop, -1 * price);
+        shopRepository.buyFish(shop, family);
     }
 
     public void sell(String fishFamily) {
-        Family family = familyRepository.findByName(fishFamily);
+        Family family = shopRepository.findFamilyByName(fishFamily);
         if(family.getFishs().isEmpty()){
             throw new NotEnoughFish();
         }
         Shop shop = shopRepository.findMainShop();
-        float account = shop.getAccount();
-        shop.setAccount(account + family.getPrice());
-        shopRepository.save(shop);
-        fishRepository.sellFish(fishFamily);
+        shopRepository.moneyTransaction(shop, family.getPrice());
+        shopRepository.sellFish(fishFamily);
     }
 }
