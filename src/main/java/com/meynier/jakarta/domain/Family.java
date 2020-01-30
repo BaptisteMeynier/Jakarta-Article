@@ -20,11 +20,6 @@ public class Family {
     private String name;
     @NotNull
     private WaterType waterType;
-    @Positive
-    private int temperature;
-    @Positive
-    @DecimalMin("0.3")
-    private float price;
     @OneToMany
     private Collection<Fish> fishs;
 
@@ -55,22 +50,6 @@ public class Family {
         this.waterType = waterType;
     }
 
-    public int getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(int temperature) {
-        this.temperature = temperature;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
     public Collection<Fish> getFishs() {
         return fishs;
     }
@@ -85,8 +64,6 @@ public class Family {
         if (o == null || getClass() != o.getClass()) return false;
         Family family = (Family) o;
         return id == family.id &&
-                temperature == family.temperature &&
-                Float.compare(family.price, price) == 0 &&
                 Objects.equals(name, family.name) &&
                 waterType == family.waterType &&
                 Objects.equals(fishs, family.fishs);
@@ -94,7 +71,7 @@ public class Family {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, waterType, temperature, price, fishs);
+        return Objects.hash(id, name, waterType, fishs);
     }
 
     @Override
@@ -103,8 +80,6 @@ public class Family {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", waterType=" + waterType +
-                ", temperature=" + temperature +
-                ", price=" + price +
                 ", fishs=" + fishs +
                 '}';
     }

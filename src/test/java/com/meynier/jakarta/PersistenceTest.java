@@ -2,6 +2,7 @@ package com.meynier.jakarta;
 
 
 import com.meynier.jakarta.domain.Fish;
+import com.meynier.jakarta.repository.ShopRepository;
 import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManager;
@@ -18,7 +19,7 @@ public class PersistenceTest {
 
     private static EntityManagerFactory entityManagerFactory;
     private static EntityManager entityManager;
-    private static PersonDao personDao;
+    private static ShopRepository shopRepository;
 
     @BeforeAll
     public static void setUpBeforeClass() throws Exception {
@@ -26,7 +27,7 @@ public class PersistenceTest {
         properties.put("eclipselink.persistencexml","META-INF/persistence-h2.xml");
         entityManagerFactory = Persistence.createEntityManagerFactory("JPADemo", properties);
         entityManager = entityManagerFactory.createEntityManager();
-        personDao = new PersonDao(entityManager);
+        shopRepository = new ShopRepository(entityManager);
     }
 
     @AfterAll
@@ -37,7 +38,7 @@ public class PersistenceTest {
 
     @Test
     public void it_should_get_person_native() throws Exception {
-        List<Fish> all = personDao.getAllNativeVersion();
+        List<Fish> all = shopRepository.countFishByFamily()getAllNativeVersion();
         assertThat(all.size(), is(3));
     }
 
