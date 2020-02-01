@@ -12,9 +12,8 @@ import java.util.Set;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Shop.findMoney", query = "select s from Shop s where name = :name")
-}
-)
+        @NamedQuery(name = "Shop.findMoney", query = "from Shop s where s.name = :name")
+})
 public class Shop {
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
@@ -26,6 +25,7 @@ public class Shop {
     private String email;
     @PastOrPresent
     private Date creation;
+    @Column(name="PHONE_NUMBER")
     @Pattern(regexp = "(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}")
     private String phoneNumber;
     private float account;

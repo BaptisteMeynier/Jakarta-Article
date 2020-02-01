@@ -38,10 +38,11 @@ public class ShopRepository {
 
     //----- NAMED QUERY -----//
 
-    public int countFishByFamily(String fishFamily) {
-        return entityManager.createNamedQuery("Fish.countByFamily", Integer.class)
-                .setParameter("familyName", fishFamily)
-                .getSingleResult();
+    public int countFishByFamily(String familyName) {
+        return entityManager.createNamedQuery("Fish.countByFamily", Long.class)
+                .setParameter("familyName", familyName)
+                .getSingleResult()
+                .intValue();
     }
 
     public Shop findMainShop() {

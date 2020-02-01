@@ -38,7 +38,7 @@ public class PersistenceTest {
     @Test
     public void it_should_count_fish_by_family() throws Exception {
         int total = shopRepository.countFishByFamily("Cichlidae");
-        assertThat(total, is(3));
+        assertThat(total, is(4));
     }
 
 

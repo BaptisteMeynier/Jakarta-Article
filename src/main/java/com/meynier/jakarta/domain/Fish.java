@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Fish.getAll", query = "select f from Fish f"),
-        @NamedQuery(name = "Fish.countByFamily", query = "select count(f) from Fish f where f.family.name = :familyName")
+        @NamedQuery(name = "Fish.countByFamily", query = "select count(fi) from Fish fi where fi.family.name = :familyName")
 }
 )
 public class Fish {

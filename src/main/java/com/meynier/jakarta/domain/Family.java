@@ -18,6 +18,7 @@ public class Family implements Serializable {
     @NotBlank
     private String name;
     @NotNull
+    @Column(name="WATER_TYPE")
     private WaterType waterType;
     @OneToMany
     private Collection<Fish> fishs;
