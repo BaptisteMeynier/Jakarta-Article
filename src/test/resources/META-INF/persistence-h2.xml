@@ -7,6 +7,10 @@
     <persistence-unit name="JPADemo" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>com.meynier.jakarta.domain.Fish</class>
+        <class>com.meynier.jakarta.domain.Family</class>
+        <class>com.meynier.jakarta.domain.FishStockKey</class>
+        <class>com.meynier.jakarta.domain.Shop</class>
+        <class>com.meynier.jakarta.domain.Stock</class>
         <properties>
             <!-- Configuring The Database Connection Details -->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />

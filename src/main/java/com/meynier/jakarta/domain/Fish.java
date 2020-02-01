@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @NamedQueries({
@@ -17,11 +18,9 @@ import java.util.Objects;
 public class Fish {
 
     @Id
-    @Column(name = "FISH_ID")
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private long id;
     @NotBlank
-    @Column(name = "FISH_NAME")
     private String name;
     @Positive
     private int temperature;
@@ -33,8 +32,8 @@ public class Fish {
     @NotNull
     private Family family;
     @NotNull
-    @ManyToOne
-    private Stock stock;
+    @OneToMany(mappedBy = "fish")
+    private Set<Stock> stock;
 
     public Fish() {
     }
@@ -87,11 +86,11 @@ public class Fish {
         this.family = family;
     }
 
-    public Stock getStock() {
+    public Set<Stock> getStock() {
         return stock;
     }
 
-    public void setStock(Stock stock) {
+    public void setStock(Set<Stock> stock) {
         this.stock = stock;
     }
 

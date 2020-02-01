@@ -11,13 +11,13 @@ public class Stock implements Serializable {
     private FishStockKey id;
 
     @ManyToOne
-    @MapsId("st_fish_id")
-    @JoinColumn(name = "st_fish_id")
+    @MapsId("fishId")
+    @JoinColumn(name = "fish_id")
     private Fish fish;
 
     @ManyToOne
-    @MapsId("st_shop_id")
-    @JoinColumn(name = "st_shop_id")
+    @MapsId("shopId")
+    @JoinColumn(name = "shop_id")
     private Shop shop;
 
     private int quantity;

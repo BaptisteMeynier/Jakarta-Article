@@ -13,11 +13,9 @@ import java.util.Objects;
 public class Family implements Serializable {
 
     @Id
-    @Column(name = "FAMILY_ID")
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private long id;
     @NotBlank
-    @Column(name = "FAMILY_NAME")
     private String name;
     @NotNull
     private WaterType waterType;

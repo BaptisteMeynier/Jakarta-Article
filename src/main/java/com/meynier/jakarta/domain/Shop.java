@@ -17,11 +17,9 @@ import java.util.Set;
 )
 public class Shop {
     @Id
-    @Column(name = "SHOP_ID")
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private long id;
     @NotBlank
-    @Column(name = "SHOP_NAME")
     private String name;
     @Email
     @NotBlank
@@ -31,7 +29,7 @@ public class Shop {
     @Pattern(regexp = "(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}")
     private String phoneNumber;
     private float account;
-    @OneToMany(mappedBy = "stock")
+    @OneToMany(mappedBy = "shop")
     private Set<Stock> stocks;
 
     public Shop() {
