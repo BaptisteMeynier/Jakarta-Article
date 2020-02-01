@@ -1,6 +1,8 @@
 package com.meynier.jakarta.rest;
 
 
+import com.meynier.jakarta.domain.Stock;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -42,7 +44,7 @@ public class ShopResource {
             lastEventId = ++lastReceivedId;
         }
         boolean running = true;
-        while (running) {
+       /* while (running) {
             Stock stock = shopService.getNextTransaction(lastEventId);
             if (stock != null) {
                 OutboundSseEvent sseEvent = this.eventBuilder
@@ -68,7 +70,7 @@ public class ShopResource {
             } catch (InterruptedException ex) {
                 // ...
             }
-        }
+        }*/
         sseEventSink.close();
     }
 }

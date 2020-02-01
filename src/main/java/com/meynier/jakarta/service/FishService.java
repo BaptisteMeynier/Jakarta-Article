@@ -1,6 +1,7 @@
 package com.meynier.jakarta.service;
 
 import com.meynier.jakarta.domain.Family;
+import com.meynier.jakarta.domain.Fish;
 import com.meynier.jakarta.domain.Shop;
 import com.meynier.jakarta.exception.NotEnoughFish;
 import com.meynier.jakarta.exception.NotEnoughMoneyException;
@@ -25,22 +26,22 @@ public class FishService {
     @Transactional
     public void buy(String fishName, int quantity) {
         Shop shop = shopRepository.findShopByName("Magic Fish");
-        shopRepository.findFishByName(fishName);
-        float price = family.getPrice() * quantity;
+        Fish fish = shopRepository.findFishByName(fishName);
+        float price = fish.getPrice() * quantity;
         if(price > shop.getAccount()){
             throw new NotEnoughMoneyException();
         }
         shopRepository.moneyTransaction(shop, -1 * price);
-        shopRepository.buyFish(shop, family);
+        //shopRepository.buyFish(shop, fish);
     }
 
-    public void sell(String fishFamily) {
-        Family family = shopRepository.findFamilyByName(fishFamily);
-        if(family.getFishs().isEmpty()){
+    public void sell(String fishName) {
+        Fish fish = shopRepository.findFishByName(fishName);
+       /* if(fishName.getFishs().isEmpty()){
             throw new NotEnoughFish();
-        }
+        }*/
         Shop shop = shopRepository.findMainShop();
-        shopRepository.moneyTransaction(shop, family.getPrice());
-        shopRepository.sellFish(fishFamily);
+        shopRepository.moneyTransaction(shop, fish.getPrice());
+        //shopRepository.sellFish(fish);
     }
 }

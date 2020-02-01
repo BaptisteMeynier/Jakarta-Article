@@ -19,7 +19,7 @@ public class MockitoTest {
 
     @InjectMocks
     private FishService sampleService;
-
+/*
     @Mock PersonDao personDao;
 
     @Test
@@ -42,5 +42,5 @@ public class MockitoTest {
 
         //THEN
         verify(personDao,times(1)).findByName(any());
-    }
+    }*/
 }

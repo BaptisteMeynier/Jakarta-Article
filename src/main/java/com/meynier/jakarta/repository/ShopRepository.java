@@ -66,7 +66,7 @@ public class ShopRepository {
     public void buyFish(Shop shop, Family fishFamily) {
         Fish fish = new Fish();
         fish.setFamily(fishFamily);
-        fish.setShop(shop);
+      //  fish.setShop(shop);
         entityManager.persist(fish);
     }
 
@@ -77,6 +77,11 @@ public class ShopRepository {
     }
 
     public Shop findShopByName(String shopName) {
-        entityManager.
+        //entityManager.
+        return null;
+    }
+
+    public Fish findFishByName(String fishName) {
+        return null;
     }
 }

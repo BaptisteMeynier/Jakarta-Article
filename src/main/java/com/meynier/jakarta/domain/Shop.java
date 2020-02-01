@@ -8,6 +8,7 @@ import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @NamedQueries({
@@ -30,8 +31,8 @@ public class Shop {
     @Pattern(regexp = "(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}")
     private String phoneNumber;
     private float account;
-    @OneToMany
-    private Collection<Fish> stock;
+    @OneToMany(mappedBy = "stock")
+    private Set<Stock> stocks;
 
     public Shop() {
     }
@@ -84,12 +85,12 @@ public class Shop {
         this.account = account;
     }
 
-    public Collection<Fish> getStock() {
-        return stock;
+    public Collection<Stock> getStocks() {
+        return stocks;
     }
 
-    public void setStock(Collection<Fish> stock) {
-        this.stock = stock;
+    public void setStocks(Set<Stock> stocks) {
+        this.stocks = stocks;
     }
 
     @Override
@@ -103,12 +104,12 @@ public class Shop {
                 Objects.equals(email, shop.email) &&
                 Objects.equals(creation, shop.creation) &&
                 Objects.equals(phoneNumber, shop.phoneNumber) &&
-                Objects.equals(stock, shop.stock);
+                Objects.equals(stocks, shop.stocks);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, creation, phoneNumber, account, stock);
+        return Objects.hash(id, name, email, creation, phoneNumber, account, stocks);
     }
 
     @Override
@@ -120,7 +121,7 @@ public class Shop {
                 ", creation=" + creation +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", account=" + account +
-                ", stock=" + stock +
+                ", stocks=" + stocks +
                 '}';
     }
 }

@@ -5,11 +5,12 @@ import com.meynier.jakarta.domain.enums.WaterType;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-public class Family {
+public class Family implements Serializable {
 
     @Id
     @Column(name = "FAMILY_ID")

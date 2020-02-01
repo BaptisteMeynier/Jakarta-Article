@@ -34,7 +34,7 @@ public class Fish {
     private Family family;
     @NotNull
     @ManyToOne
-    private Shop shop;
+    private Stock stock;
 
     public Fish() {
     }
@@ -87,12 +87,12 @@ public class Fish {
         this.family = family;
     }
 
-    public Shop getShop() {
-        return shop;
+    public Stock getStock() {
+        return stock;
     }
 
-    public void setShop(Shop shop) {
-        this.shop = shop;
+    public void setStock(Stock stock) {
+        this.stock = stock;
     }
 
     @Override
@@ -106,12 +106,12 @@ public class Fish {
                 quantity == fish.quantity &&
                 Objects.equals(name, fish.name) &&
                 Objects.equals(family, fish.family) &&
-                Objects.equals(shop, fish.shop);
+                Objects.equals(stock, fish.stock);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, temperature, price, quantity, family, shop);
+        return Objects.hash(id, name, temperature, price, quantity, family, stock);
     }
 
     @Override
@@ -123,7 +123,7 @@ public class Fish {
                 ", price=" + price +
                 ", quantity=" + quantity +
                 ", family=" + family +
-                ", shop=" + shop +
+                ", stock=" + stock +
                 '}';
     }
 }
