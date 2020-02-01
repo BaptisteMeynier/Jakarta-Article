@@ -17,15 +17,19 @@ import java.util.Objects;
 public class Fish {
 
     @Id
+    @Column(name = "FISH_ID")
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private long id;
     @NotBlank
+    @Column(name = "FISH_NAME")
     private String name;
     @Positive
     private int temperature;
     @Positive
     @DecimalMin("0.3")
     private float price;
+    @Positive
+    private int quantity;
     @NotNull
     private Family family;
     @NotNull
@@ -51,14 +55,6 @@ public class Fish {
         this.name = name;
     }
 
-    public Family getFamily() {
-        return family;
-    }
-
-    public void setFamily(Family family) {
-        this.family = family;
-    }
-
     public int getTemperature() {
         return temperature;
     }
@@ -73,6 +69,22 @@ public class Fish {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Family getFamily() {
+        return family;
+    }
+
+    public void setFamily(Family family) {
+        this.family = family;
     }
 
     public Shop getShop() {
@@ -91,6 +103,7 @@ public class Fish {
         return id == fish.id &&
                 temperature == fish.temperature &&
                 Float.compare(fish.price, price) == 0 &&
+                quantity == fish.quantity &&
                 Objects.equals(name, fish.name) &&
                 Objects.equals(family, fish.family) &&
                 Objects.equals(shop, fish.shop);
@@ -98,7 +111,7 @@ public class Fish {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, family, temperature, price, shop);
+        return Objects.hash(id, name, temperature, price, quantity, family, shop);
     }
 
     @Override
@@ -106,9 +119,10 @@ public class Fish {
         return "Fish{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", family=" + family +
                 ", temperature=" + temperature +
                 ", price=" + price +
+                ", quantity=" + quantity +
+                ", family=" + family +
                 ", shop=" + shop +
                 '}';
     }

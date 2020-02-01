@@ -16,9 +16,11 @@ import java.util.Objects;
 )
 public class Shop {
     @Id
+    @Column(name = "SHOP_ID")
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private long id;
     @NotBlank
+    @Column(name = "SHOP_NAME")
     private String name;
     @Email
     @NotBlank

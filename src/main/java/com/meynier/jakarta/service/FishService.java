@@ -23,9 +23,9 @@ public class FishService {
     }
 
     @Transactional
-    public void buy(String fishFamily, int quantity) {
-        Family family = shopRepository.findFamilyByName(fishFamily);
-        Shop shop = shopRepository.findMainShop();
+    public void buy(String fishName, int quantity) {
+        Shop shop = shopRepository.findShopByName("Magic Fish");
+        shopRepository.findFishByName(fishName);
         float price = family.getPrice() * quantity;
         if(price > shop.getAccount()){
             throw new NotEnoughMoneyException();

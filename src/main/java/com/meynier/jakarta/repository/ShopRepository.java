@@ -27,31 +27,20 @@ public class ShopRepository {
         this.entityManager = entityManager;
     }
 
-    public Family findFamilyByName(String fishFamily) {
-        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Family> listCriteria = builder.createQuery(Family.class);
-        Root<Family> listRoot = listCriteria.from(Family.class);
-        listCriteria.select(listRoot).where(builder.equal(listRoot.get("name"),fishFamily));
-        TypedQuery<Family> query = entityManager.createQuery(listCriteria);
-        return query.getSingleResult();
+
+    //----- NATIVE QUERY -----//
+
+    public void sellFish(String fishFamily) {
+        entityManager.createNativeQuery("delete from Fish where id = (select max(id) from Fish) and family_id=:fishFamily")
+                .setParameter("fishFamily", fishFamily)
+                .getSingleResult();
     }
+
+    //----- NAMED QUERY -----//
 
     public int countFishByFamily(String fishFamily) {
         return entityManager.createNamedQuery("Fish.countByFamily", Integer.class)
                 .setParameter("familyName", fishFamily)
-                .getSingleResult();
-    }
-
-    public void buyFish(Shop shop, Family fishFamily) {
-        Fish fish = new Fish();
-        fish.setFamily(fishFamily);
-        fish.setShop(shop);
-        entityManager.persist(fish);
-    }
-
-    public void sellFish(String fishFamily) {
-        entityManager.createNamedQuery("delete from Fish where id = (select max(id) from Fish) and family_id=:fishFamily")
-                .setParameter("fishFamily", fishFamily)
                 .getSingleResult();
     }
 
@@ -61,9 +50,33 @@ public class ShopRepository {
                 .getSingleResult();
     }
 
+    //----- CRITERIA QUERY -----//
+
+    public Family findFamilyByName(String fishFamily) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Family> listCriteria = builder.createQuery(Family.class);
+        Root<Family> listRoot = listCriteria.from(Family.class);
+        listCriteria.select(listRoot).where(builder.equal(listRoot.get("name"),fishFamily));
+        TypedQuery<Family> query = entityManager.createQuery(listCriteria);
+        return query.getSingleResult();
+    }
+
+    //----- SIMPLY ENTITY MANAGER -----//
+
+    public void buyFish(Shop shop, Family fishFamily) {
+        Fish fish = new Fish();
+        fish.setFamily(fishFamily);
+        fish.setShop(shop);
+        entityManager.persist(fish);
+    }
+
+
     public void moneyTransaction(Shop shop, float money) {
         shop.setAccount(shop.getAccount() + money);
         entityManager.persist(shop);
     }
 
+    public Shop findShopByName(String shopName) {
+        entityManager.
+    }
 }

@@ -3,10 +3,8 @@ package com.meynier.jakarta.domain;
 import com.meynier.jakarta.domain.enums.WaterType;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -14,9 +12,11 @@ import java.util.Objects;
 public class Family {
 
     @Id
+    @Column(name = "FAMILY_ID")
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private long id;
     @NotBlank
+    @Column(name = "FAMILY_NAME")
     private String name;
     @NotNull
     private WaterType waterType;

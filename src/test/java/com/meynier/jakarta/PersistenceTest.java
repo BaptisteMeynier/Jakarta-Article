@@ -37,15 +37,11 @@ public class PersistenceTest {
     }
 
     @Test
-    public void it_should_get_person_native() throws Exception {
-        List<Fish> all = shopRepository.countFishByFamily()getAllNativeVersion();
-        assertThat(all.size(), is(3));
+    public void it_should_count_fish_by_family() throws Exception {
+        int total = shopRepository.countFishByFamily("Cichlidae");
+        assertThat(total, is(3));
     }
 
-    @Test
-    public void it_should_get_person() throws Exception {
-        List<Fish> all = personDao.getAll();
-        assertThat(all.size(), is(3));
-    }
+
 
 }
