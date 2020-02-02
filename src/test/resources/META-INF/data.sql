@@ -5,6 +5,7 @@ INSERT INTO FAMILY (id,name,water_type) VALUES (1,'Cichlidae',1);
 INSERT INTO FAMILY (id,name,water_type) VALUES (2,'Cyprinidae',1);
 INSERT INTO FAMILY (id,name,water_type) VALUES (3,'Characidae',1);
 INSERT INTO FAMILY (id,name,water_type) VALUES (4,'Pomacentridae',2);
+INSERT INTO FAMILY (id,name,water_type) VALUES (5,'Sphyrnidae',1);
 
 --- FISH ---
 
@@ -27,6 +28,7 @@ INSERT INTO FISH (id, name, temperature, price, family_fk) VALUES (16,'Le demois
 INSERT INTO FISH (id, name, temperature, price, family_fk) VALUES (17,'Poisson clown','22',8.2,4);
 INSERT INTO FISH (id, name, temperature, price, family_fk) VALUES (18,'Sergent major','21',13,4);
 INSERT INTO FISH (id, name, temperature, price, family_fk) VALUES (19,'Demoiselle bicolore','19',18,4);
+INSERT INTO FISH (id, name, temperature, price, family_fk) VALUES (20,'Requin marteau','18',30000,5);
 
 
 --- SHOP ---
@@ -54,3 +56,4 @@ INSERT INTO STOCK (shop_fk, fish_fk, quantity) VALUES (1,16, 3);
 INSERT INTO STOCK (shop_fk, fish_fk, quantity) VALUES (1,17, 7);
 INSERT INTO STOCK (shop_fk, fish_fk, quantity) VALUES (1,18, 1);
 INSERT INTO STOCK (shop_fk, fish_fk, quantity) VALUES (1,19, 3);
+INSERT INTO STOCK (shop_fk, fish_fk, quantity) VALUES (1,20, 0);

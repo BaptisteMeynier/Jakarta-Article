@@ -1,46 +1,61 @@
 package com.meynier.jakarta;
 
 import com.meynier.jakarta.domain.Fish;
+import com.meynier.jakarta.domain.Shop;
+import com.meynier.jakarta.domain.Stock;
+import com.meynier.jakarta.repository.ShopRepository;
 import com.meynier.jakarta.service.FishService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.internal.stubbing.answers.DoesNothing;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
 
 @ExtendWith(MockitoExtension.class)
 public class MockitoTest {
 
     @InjectMocks
-    private FishService sampleService;
-/*
-    @Mock PersonDao personDao;
+    private FishService fishService;
+
+    @Mock
+    ShopRepository shopRepository;
 
     @Test
-    public void should_get_persons_by_name(){
+    public void it_should_sell_fish(){
         //GIVEN
-        String name="Bernard";
-
-        Fish person1 = new Fish();
-        person1.setName("Dupont");
-        person1.setLastName("Bernard");
-
-        Fish person2 = new Fish();
-        person2.setName("Dupont");
-        person2.setLastName("Charline");
-
-        when(personDao.findByName(any())).thenReturn(Arrays.asList(person1, person2));
-
+        String shopName = "Magic Fish";
+        String fishName = "Scalaire";
+        int quantity = 3;
+        Shop shop = new Shop();
+        shop.setAccount(1000);
+        Fish fish = new Fish();
+        fish.setName(fishName);
+        fish.setPrice(5);
+        Stock stock = new Stock();
+        stock.setShop(shop);
+        stock.setFish(fish);
+        stock.setQuantity(12);
+        when(shopRepository.findShopByName(any())).thenReturn(shop);
+        when(shopRepository.findFishByName(any())).thenReturn(fish);
+        when(shopRepository.findStock(any(),any())).thenReturn(stock);
+        doNothing().when(shopRepository).saveStock(any());
+        doNothing().when(shopRepository).saveShop(any());
         //WHEN
-        List<Fish> persons = sampleService.findByName(name);
-
+        float bill = fishService.sell(shopName, fishName, quantity);
         //THEN
-        verify(personDao,times(1)).findByName(any());
-    }*/
+        verify(shopRepository,times(1)).saveShop(any());
+        assertThat(bill, is(15f));
+    }
+
+
 }

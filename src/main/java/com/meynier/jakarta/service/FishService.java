@@ -1,9 +1,9 @@
 package com.meynier.jakarta.service;
 
-import com.meynier.jakarta.domain.Family;
 import com.meynier.jakarta.domain.Fish;
 import com.meynier.jakarta.domain.Shop;
-import com.meynier.jakarta.exception.NotEnoughFish;
+import com.meynier.jakarta.domain.Stock;
+import com.meynier.jakarta.exception.NotEnoughFishException;
 import com.meynier.jakarta.exception.NotEnoughMoneyException;
 import com.meynier.jakarta.repository.ShopRepository;
 
@@ -11,6 +11,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
+import java.util.function.Supplier;
 
 @Named
 @ApplicationScoped
@@ -24,24 +25,39 @@ public class FishService {
     }
 
     @Transactional
-    public void buy(String fishName, int quantity) {
-        Shop shop = shopRepository.findShopByName("Magic Fish");
+    public float buy(String shopName, String fishName, int quantity) {
+        Shop shop = shopRepository.findShopByName(shopName);
         Fish fish = shopRepository.findFishByName(fishName);
-        float price = fish.getPrice() * quantity;
-        if(price > shop.getAccount()){
+        Stock stock = shopRepository.findStock(shopName, fishName);
+
+        float price = quantity * fish.getPrice();
+        if(shop.getAccount() < price){
             throw new NotEnoughMoneyException();
         }
-        shopRepository.moneyTransaction(shop, -1 * price);
-        //shopRepository.buyFish(shop, fish);
+        shop.setAccount(shop.getAccount() - price);
+        stock.setQuantity(stock.getQuantity() + quantity);
+        shopRepository.saveStock(stock);
+        shopRepository.saveShop(shop);
+
+        return price;
     }
 
-    public void sell(String fishName) {
+    @Transactional
+    public float sell(String shopName, String fishName, int quantity) {
+        Shop shop = shopRepository.findShopByName(shopName);
         Fish fish = shopRepository.findFishByName(fishName);
-       /* if(fishName.getFishs().isEmpty()){
-            throw new NotEnoughFish();
-        }*/
-        //Shop shop = shopRepository.findMainShop();
-        //shopRepository.moneyTransaction(shop, fish.getPrice());
-        //shopRepository.sellFish(fish);
+        Stock stock = shopRepository.findStock(shopName, fishName);
+
+        float price = quantity * fish.getPrice();
+        if(stock.getQuantity() < quantity){
+            throw new NotEnoughFishException();
+        }
+        shop.setAccount(shop.getAccount() + price);
+        stock.setQuantity(stock.getQuantity() - quantity);
+        shopRepository.saveStock(stock);
+        shopRepository.saveShop(shop);
+
+        return price;
     }
+
 }

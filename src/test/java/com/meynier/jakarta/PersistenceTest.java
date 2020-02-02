@@ -4,6 +4,7 @@ package com.meynier.jakarta;
 import com.meynier.jakarta.domain.Family;
 import com.meynier.jakarta.domain.Fish;
 import com.meynier.jakarta.domain.Shop;
+import com.meynier.jakarta.domain.Stock;
 import com.meynier.jakarta.repository.ShopRepository;
 import org.junit.jupiter.api.*;
 
@@ -60,12 +61,32 @@ public class PersistenceTest {
     @Test
     public void it_should_find_shop_by_name() {
         //GIVEN
-        String familyName = "Magic Fish";
+        String shopName = "Magic Fish";
         //WHEN
-        Shop shop = shopRepository.findShopByName(familyName);
+        Shop shop = shopRepository.findShopByName(shopName);
         //THEN
-        assertThat(shop.getName(), is(familyName));
+        assertThat(shop.getName(), is(shopName));
     }
 
+    @Test
+    public void it_should_find_stock_for_shop_and_fish() {
+        //GIVEN
+        String shopName = "Magic Fish";
+        String fishName = "Scalaire";
+        //WHEN
+        Stock stock = shopRepository.findStock(shopName,fishName);
+        //THEN
+        assertThat(stock.getQuantity(), is(5));
+    }
+
+    @Test
+    public void it_should_find_fish_by_name() {
+        //GIVEN
+        String fishName = "Scalaire";
+        //WHEN
+        Fish fish = shopRepository.findFishByName(fishName);
+        //THEN
+        assertThat(fish.getName(), is(fishName));
+    }
 
 }
