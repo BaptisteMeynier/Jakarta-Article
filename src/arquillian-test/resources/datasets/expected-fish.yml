@@ -1,15 +1,10 @@
 family:
   - id: 1
     name: 'Sphyrnidae'
-    water_type: 2
+    water_type: 0
 fish:
   - id: 1
     name: "Requin marteau"
     temperature: 16
-    price: 30000
-    family_fk: 1
-  - id: 2
-    name: "Requin renard"
-    temperature: 18
-    price: 180000
+    price: 30000.0
     family_fk: 1

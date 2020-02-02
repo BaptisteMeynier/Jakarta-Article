@@ -60,20 +60,17 @@ public class ShopRepositoryIT {
     @ShouldMatchDataSet(value= "datasets/expected-fish.yml", excludeColumns="id")
     public void it_should_persist_family_and_fishs() throws Exception {
         //GIVEN
-        Fish shark = new Fish();
-        shark.setName("Requin marteau");
-        shark.setTemperature(16);
-        shark.setPrice(30000);
-
-        Fish shark2 = new Fish();
-        shark2.setName("Requin renard");
-        shark2.setTemperature(16);
-        shark2.setPrice(18000);
+        Fish shark1 = new Fish();
+        shark1.setName("Requin marteau");
+        shark1.setTemperature(16);
+        shark1.setPrice(30000);
 
         Family family = new Family();
         family.setName("Sphyrnidae");
         family.setWaterType(WaterType.SEA);
-        family.setFishs(Stream.of(shark,shark2).collect(Collectors.toList()));
+        family.setFishs(Stream.of(shark1).collect(Collectors.toList()));
+
+        shark1.setFamily(family);
 
         //WHEN
         shopRepository.saveFamily(family);
