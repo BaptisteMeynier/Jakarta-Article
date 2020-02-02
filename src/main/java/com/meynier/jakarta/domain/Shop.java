@@ -5,13 +5,13 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
-public class Shop {
+public class Shop implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private long id;

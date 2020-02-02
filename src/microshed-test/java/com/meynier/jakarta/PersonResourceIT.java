@@ -1,6 +1,8 @@
 package com.meynier.jakarta;
 
 import com.meynier.jakarta.rest.FishResource;
+import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.microshed.testing.jaxrs.RESTClient;
 import org.microshed.testing.jupiter.MicroShedTest;
@@ -10,6 +12,7 @@ import org.testcontainers.junit.jupiter.Container;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Disabled
 @MicroShedTest
 public class PersonResourceIT {
 

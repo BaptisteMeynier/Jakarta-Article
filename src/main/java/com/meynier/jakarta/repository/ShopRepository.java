@@ -13,6 +13,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
 @Named
 @ApplicationScoped
@@ -87,5 +88,8 @@ public class ShopRepository {
         entityManager.persist(shop);
     }
 
-
+    @Transactional
+    public void saveFamily(Family family) {
+        entityManager.persist(family);
+    }
 }

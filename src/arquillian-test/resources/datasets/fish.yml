@@ -1,0 +1,23 @@
+family:
+  - id: 1
+    name: 'Cichlidae'
+    water_type: 1
+  - id: 2
+    name: 'Cyprinidae'
+    water_type: 1
+fish:
+  - id: 1
+    name: "Discus"
+    temperature: 24
+    price: 25.0
+    family_fk: 1
+  - id: 2
+    name: "Scalaire"
+    temperature: 24
+    price: 18.0
+    family_fk: 1
+  - id: 3
+    name: "Pelmato"
+    temperature: 25
+    price: 8.0
+    family_fk: 2

@@ -6,9 +6,9 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @NamedQueries({
@@ -17,7 +17,7 @@ import java.util.Set;
         @NamedQuery(name = "Fish.countByFamily", query = "select count(fi) from Fish fi where fi.family.name = :familyName")
 }
 )
-public class Fish {
+public class Fish implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
@@ -29,13 +29,10 @@ public class Fish {
     @Positive
     @DecimalMin("0.3")
     private float price;
-    @Positive
-    private int quantity;
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="family_fk")
     private Family family;
-    @NotNull
     @OneToMany(mappedBy = "fish")
     private Collection<Stock> stock;
 
@@ -71,14 +68,6 @@ public class Fish {
         this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public Family getFamily() {
         return family;
     }
@@ -103,7 +92,6 @@ public class Fish {
         return id == fish.id &&
                 temperature == fish.temperature &&
                 Float.compare(fish.price, price) == 0 &&
-                quantity == fish.quantity &&
                 Objects.equals(name, fish.name) &&
                 Objects.equals(family, fish.family) &&
                 Objects.equals(stock, fish.stock);
@@ -111,6 +99,6 @@ public class Fish {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, temperature, price, quantity, family, stock);
+        return Objects.hash(id, name, temperature, price, family, stock);
     }
 }
