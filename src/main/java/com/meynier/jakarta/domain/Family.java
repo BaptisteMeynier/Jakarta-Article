@@ -20,7 +20,7 @@ public class Family implements Serializable {
     @NotNull
     @Column(name="WATER_TYPE")
     private WaterType waterType;
-    @OneToMany
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="family")
     private Collection<Fish> fishs;
 
     public Family() {
@@ -84,4 +84,5 @@ public class Family implements Serializable {
                 '}';
     }
 }
+
 

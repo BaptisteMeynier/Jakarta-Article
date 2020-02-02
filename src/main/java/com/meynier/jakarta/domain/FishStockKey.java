@@ -8,29 +8,29 @@ import java.util.Objects;
 @Embeddable
 public class FishStockKey implements Serializable {
 
-    @Column(name = "fish_id")
-    private Long fishId;
+    @Column(name = "fish_fk")
+    private Long fishFk;
 
-    @Column(name = "shop_id")
-    private Long shopId;
+    @Column(name = "shop_fk")
+    private Long shopFk;
 
     public FishStockKey() {
     }
 
-    public Long getFishId() {
-        return fishId;
+    public Long getFishFk() {
+        return fishFk;
     }
 
-    public void setFishId(Long fishId) {
-        this.fishId = fishId;
+    public void setFishFk(Long fishFk) {
+        this.fishFk = fishFk;
     }
 
-    public Long getShopId() {
-        return shopId;
+    public Long getShopFk() {
+        return shopFk;
     }
 
-    public void setShopId(Long shopId) {
-        this.shopId = shopId;
+    public void setShopFk(Long shopFk) {
+        this.shopFk = shopFk;
     }
 
     @Override
@@ -38,12 +38,12 @@ public class FishStockKey implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FishStockKey that = (FishStockKey) o;
-        return Objects.equals(fishId, that.fishId) &&
-                Objects.equals(shopId, that.shopId);
+        return Objects.equals(fishFk, that.fishFk) &&
+                Objects.equals(shopFk, that.shopFk);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fishId, shopId);
+        return Objects.hash(fishFk, shopFk);
     }
 }

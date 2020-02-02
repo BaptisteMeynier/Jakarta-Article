@@ -11,9 +11,6 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@NamedQueries({
-        @NamedQuery(name = "Shop.findMoney", query = "from Shop s where s.name = :name")
-})
 public class Shop {
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
@@ -30,7 +27,7 @@ public class Shop {
     private String phoneNumber;
     private float account;
     @OneToMany(mappedBy = "shop")
-    private Set<Stock> stocks;
+    private Collection<Stock> stocks;
 
     public Shop() {
     }
@@ -87,7 +84,7 @@ public class Shop {
         return stocks;
     }
 
-    public void setStocks(Set<Stock> stocks) {
+    public void setStocks(Collection<Stock> stocks) {
         this.stocks = stocks;
     }
 

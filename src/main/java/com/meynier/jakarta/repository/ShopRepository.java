@@ -45,11 +45,6 @@ public class ShopRepository {
                 .intValue();
     }
 
-    public Shop findMainShop() {
-        return entityManager.createNamedQuery("Shop.findMoney", Shop.class)
-                .setParameter("name","Main")
-                .getSingleResult();
-    }
 
     //----- CRITERIA QUERY -----//
 
@@ -78,8 +73,9 @@ public class ShopRepository {
     }
 
     public Shop findShopByName(String shopName) {
-        //entityManager.
-        return null;
+        return (Shop)entityManager.createNativeQuery(String.format("select * from Shop where name = '%s'", shopName),Shop.class)
+                .setParameter("name", shopName)
+                .getSingleResult();
     }
 
     public Fish findFishByName(String fishName) {

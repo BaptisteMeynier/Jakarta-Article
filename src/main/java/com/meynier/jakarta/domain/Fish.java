@@ -6,6 +6,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 
@@ -30,13 +31,12 @@ public class Fish {
     @Positive
     private int quantity;
     @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="family_fk")
     private Family family;
     @NotNull
     @OneToMany(mappedBy = "fish")
-    private Set<Stock> stock;
-
-    public Fish() {
-    }
+    private Collection<Stock> stock;
 
     public long getId() {
         return id;
@@ -86,11 +86,11 @@ public class Fish {
         this.family = family;
     }
 
-    public Set<Stock> getStock() {
+    public Collection<Stock> getStock() {
         return stock;
     }
 
-    public void setStock(Set<Stock> stock) {
+    public void setStock(Collection<Stock> stock) {
         this.stock = stock;
     }
 
@@ -111,18 +111,5 @@ public class Fish {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, temperature, price, quantity, family, stock);
-    }
-
-    @Override
-    public String toString() {
-        return "Fish{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", temperature=" + temperature +
-                ", price=" + price +
-                ", quantity=" + quantity +
-                ", family=" + family +
-                ", stock=" + stock +
-                '}';
     }
 }

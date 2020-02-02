@@ -40,8 +40,8 @@ public class FishService {
        /* if(fishName.getFishs().isEmpty()){
             throw new NotEnoughFish();
         }*/
-        Shop shop = shopRepository.findMainShop();
-        shopRepository.moneyTransaction(shop, fish.getPrice());
+        //Shop shop = shopRepository.findMainShop();
+        //shopRepository.moneyTransaction(shop, fish.getPrice());
         //shopRepository.sellFish(fish);
     }
 }
