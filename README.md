@@ -6,5 +6,9 @@ sudo systemctl start docker
 
 docker build -t jakarta-article:1.0.0 -f src/microshed-test/docker/Dockerfile .
 
+docker run -p 8080:8080 -d -it jakarta-article:1.0.0
+
+docker exec -it 87872a942cc7 /bin/sh
+
 NEXT EXCEPTION MAPPER
 CDI EVENT
