@@ -10,5 +10,13 @@ docker run -p 8080:8080 -d -it jakarta-article:1.0.0
 
 docker exec -it 87872a942cc7 /bin/sh
 
+bin/asadmin start-domain
+
+bin/asadmin deploy /home/baptiste/IdeaProjects/jakarta-article/target/jakarta-article.war
+
+bin/asadmin deploy --force=true /home/baptiste/IdeaProjects/jakarta-article/target/jakarta-article.war
+
+https://github.com/hantsy/ee8-sandbox/blob/master/jaxrs-sse/src/main/java/com/hantsylabs/example/ee8/jaxrs/SseCdiResource.java
+
 NEXT EXCEPTION MAPPER
 CDI EVENT
