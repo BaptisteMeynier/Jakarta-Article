@@ -3,7 +3,6 @@ package com.meynier.jakarta.rest;
 
 import com.meynier.jakarta.event.StockEvent;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.ObservesAsync;
 import javax.ws.rs.*;
@@ -11,7 +10,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.sse.OutboundSseEvent;
 import javax.ws.rs.sse.Sse;
-import javax.ws.rs.sse.SseBroadcaster;
 import javax.ws.rs.sse.SseEventSink;
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;

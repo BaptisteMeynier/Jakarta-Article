@@ -5,6 +5,9 @@ public class StockEvent {
     private TransactionType transactionType;
     private float total;
 
+    public StockEvent() {
+    }
+
     public StockEvent(TransactionType transactionType, float total) {
         this.transactionType = transactionType;
         this.total = total;

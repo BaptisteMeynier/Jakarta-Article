@@ -7,12 +7,11 @@ import com.meynier.jakarta.exception.NotEnoughMoneyException;
 import com.meynier.jakarta.repository.ShopRepository;
 import com.meynier.jakarta.service.FishService;
 import com.meynier.jakarta.utils.EntityManagerHK2Factory;
+import com.meynier.jakarta.utils.ProducerUtils;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -28,9 +27,23 @@ public class InjectionTest {
         ServiceLocatorUtilities.addClasses(
                 serviceLocator,
                 EntityManagerHK2Factory.class,
+                ProducerUtils.class,
                 FishService.class,
                 ShopRepository.class,
                 Family.class, Fish.class, FishStockKey.class, Shop.class, Stock.class, WaterType.class);
+    }
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        ServiceLocator locator = ServiceLocatorUtilities.createAndPopulateServiceLocator();
+       /* ServiceLocatorUtilities.bind(locator, new AbstractBinder() {
+
+            @Override
+            protected void configure() {
+                bind(event).to(new FakeEventManager());
+            }
+        });*/
+        locator.inject(this);
     }
 
     @Test
