@@ -18,6 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 @MicroShedTest
+@Disabled
 public class FishResourceIT {
 
     private final static String CONTEXT_APPLICATION = "jakarta-article";

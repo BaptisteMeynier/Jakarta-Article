@@ -2,8 +2,9 @@ package com.meynier.jakarta.rest;
 
 
 import com.meynier.jakarta.event.StockEvent;
+import jdk.jfr.internal.LogLevel;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.ObservesAsync;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -15,13 +16,17 @@ import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Path("/shop")
-@RequestScoped
+@ApplicationScoped
 public class ShopResource {
 
+    private static final Logger LOGGER = Logger.getLogger(ShopResource.class.getName());
+
     private OutboundSseEvent.Builder eventBuilder;
-    private final BlockingQueue<StockEvent> stockEvent = new ArrayBlockingQueue<>(10);
+    private final Map<String,BlockingQueue<StockEvent>> eventsMap = new Hashtable<>();
 
     @Context
     public void setSse(Sse sse) {
@@ -29,25 +34,35 @@ public class ShopResource {
     }
 
     public void getStockEvent(@ObservesAsync StockEvent event) {
-        stockEvent.add(event);
+        eventsMap.forEach((key, value) -> value.add(event));
     }
 
     @GET
     @Path("stock")
     @Produces(MediaType.SERVER_SENT_EVENTS)
-    public void getStockPrices(@Context SseEventSink sseEventSink) throws InterruptedException {
-        StockEvent poll;
-        while(Objects.nonNull(poll = stockEvent.poll(5, TimeUnit.SECONDS))){
-                OutboundSseEvent sseEvent = this.eventBuilder
-                        .name("stock")
-                        //.id(String.valueOf(lastEventId))
-                        .mediaType(MediaType.APPLICATION_JSON_TYPE)
-                        .data(StockEvent.class, poll)
-                        .reconnectDelay(3000)
-                        .comment("price change")
-                        .build();
-                sseEventSink.send(sseEvent);
+    public void getStockPrices(@Context SseEventSink sseEventSink) {
+        String userSession = UUID.randomUUID().toString();
+        eventsMap.put(userSession, new ArrayBlockingQueue<>(20));
+        try{
+            StockEvent poll;
+            while(Objects.nonNull(poll = eventsMap.get(userSession).poll(5, TimeUnit.SECONDS))){
+                    OutboundSseEvent sseEvent = this.eventBuilder
+                            .name("stock")
+                            .id(poll.getUuid())
+                            .mediaType(MediaType.APPLICATION_JSON_TYPE)
+                            .data(StockEvent.class, poll)
+                            .reconnectDelay(3000)
+                            .comment("price change")
+                            .build();
+                    sseEventSink.send(sseEvent);
+            }
+        } catch (InterruptedException e) {
+            LOGGER.log(Level.SEVERE,e.getMessage(),e);
+        }finally {
+            eventsMap.remove(userSession);
+            sseEventSink.close();
         }
-        sseEventSink.close();
+
     }
+
 }

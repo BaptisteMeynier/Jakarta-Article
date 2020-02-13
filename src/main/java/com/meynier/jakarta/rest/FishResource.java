@@ -1,7 +1,7 @@
 package com.meynier.jakarta.rest;
 
 import com.meynier.jakarta.rest.param.FishTransactionParam;
-import com.meynier.jakarta.service.FishService;
+import com.meynier.jakarta.service.FishServiceImpl;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -22,7 +22,7 @@ public class FishResource {
     private static final Logger LOGGER = Logger.getLogger(FishResource.class.getName());
 
     @Inject
-    private FishService fishService;
+    private FishServiceImpl fishService;
 
     @GET
     @Path("{fishFamily}")
@@ -31,6 +31,7 @@ public class FishResource {
     }
 
     @POST
+    @Path("{fishName}")
     public Response buy(@BeanParam FishTransactionParam fishTransactionParam) {
         float bill = fishService.buy(fishTransactionParam.shopName, fishTransactionParam.fishName, fishTransactionParam.quantity);
         return Response.ok(bill).build();

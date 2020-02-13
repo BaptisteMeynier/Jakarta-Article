@@ -4,16 +4,12 @@ import com.meynier.jakarta.domain.Fish;
 import com.meynier.jakarta.domain.Shop;
 import com.meynier.jakarta.domain.Stock;
 import com.meynier.jakarta.repository.ShopRepository;
-import com.meynier.jakarta.service.FishService;
+import com.meynier.jakarta.service.FishServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.internal.stubbing.answers.DoesNothing;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -25,7 +21,7 @@ import static org.mockito.Mockito.doNothing;
 public class MockitoTest {
 
     @InjectMocks
-    private FishService fishService;
+    private FishServiceImpl fishService;
 
     @Mock
     ShopRepository shopRepository;

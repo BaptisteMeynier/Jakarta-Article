@@ -4,6 +4,7 @@ import com.meynier.jakarta.config.EntityManagerConfigurator;
 import com.meynier.jakarta.domain.Family;
 import com.meynier.jakarta.domain.Fish;
 import com.meynier.jakarta.domain.enums.WaterType;
+import com.meynier.jakarta.event.StockEvent;
 import com.meynier.jakarta.repository.ShopRepository;
 import org.arquillian.ape.api.UsingDataSet;
 import org.arquillian.ape.rdbms.ShouldMatchDataSet;

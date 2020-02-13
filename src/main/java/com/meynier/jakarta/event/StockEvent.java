@@ -1,32 +1,30 @@
 package com.meynier.jakarta.event;
 
+import java.util.UUID;
+
 public class StockEvent {
 
-    private TransactionType transactionType;
-    private float total;
+    private final ShopTransactionType transactionType;
+    private final float total;
+    private final String uuid;
 
-    public StockEvent() {
-    }
 
-    public StockEvent(TransactionType transactionType, float total) {
+    public StockEvent(ShopTransactionType transactionType, float total) {
         this.transactionType = transactionType;
         this.total = total;
+        this.uuid = UUID.randomUUID().toString();
     }
 
-    public TransactionType getTransactionType() {
+    public String getUuid() {
+        return uuid;
+    }
+
+    public ShopTransactionType getTransactionType() {
         return transactionType;
-    }
-
-    public void setTransactionType(TransactionType transactionType) {
-        this.transactionType = transactionType;
     }
 
     public float getTotal() {
         return total;
-    }
-
-    public void setTotal(float total) {
-        this.total = total;
     }
 
     @Override
@@ -34,6 +32,7 @@ public class StockEvent {
         return "StockEvent{" +
                 "transactionType=" + transactionType +
                 ", total=" + total +
+                ", uuid='" + uuid + '\'' +
                 '}';
     }
 }

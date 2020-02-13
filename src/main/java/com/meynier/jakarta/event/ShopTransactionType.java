@@ -1,5 +1,5 @@
 package com.meynier.jakarta.event;
 
-public enum TransactionType {
+public enum ShopTransactionType {
     PURCHASE,SALE
 }
