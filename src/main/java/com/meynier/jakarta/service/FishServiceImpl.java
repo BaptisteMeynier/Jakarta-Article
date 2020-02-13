@@ -11,6 +11,9 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
+import java.util.Random;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 @Named
 @ApplicationScoped
@@ -43,9 +46,6 @@ public class FishServiceImpl implements FishService {
 
     @Transactional
     public float sell(String shopName, String fishName, int quantity) {
-        System.out.println(shopName);
-        System.out.println(fishName);
-        System.out.println(quantity);
         Shop shop = shopRepository.findShopByName(shopName);
         Fish fish = shopRepository.findFishByName(fishName);
         Stock stock = shopRepository.findStock(shopName, fishName);
@@ -62,4 +62,16 @@ public class FishServiceImpl implements FishService {
         return price;
     }
 
+    public CompletableFuture<Void> callManager(Executor executor) {
+        int min = 1;
+        int max = 3;
+        int meetingDuration = new Random().nextInt(max - min) + min;
+        return CompletableFuture.runAsync(() -> {
+                    try {
+                        Thread.sleep(1000 * meetingDuration);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }, executor);
+    }
 }

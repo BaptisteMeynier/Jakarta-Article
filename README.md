@@ -18,5 +18,7 @@ bin/asadmin deploy --force=true /home/baptiste/IdeaProjects/jakarta-article/targ
 
 https://github.com/hantsy/ee8-sandbox/blob/master/jaxrs-sse/src/main/java/com/hantsylabs/example/ee8/jaxrs/SseCdiResource.java
 
+https://allegro.tech/2014/10/async-rest.html
+
 NEXT EXCEPTION MAPPER
 CDI EVENT

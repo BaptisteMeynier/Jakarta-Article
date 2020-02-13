@@ -2,7 +2,6 @@ package com.meynier.jakarta.rest;
 
 
 import com.meynier.jakarta.event.StockEvent;
-import jdk.jfr.internal.LogLevel;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.ObservesAsync;
