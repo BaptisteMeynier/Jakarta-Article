@@ -1,3 +1,20 @@
+# Fish Shop Jakarta ee 8 application
+
+This application is a showcase of some Jakarta ee 8 features. 
+I use Payara Fish micro serveur but I could take an other Jakarta ee server implementation like Open Liberty, Wildfly, Glassfish.
+You would find also some technicals to test your application.
+
+##Pesistence (JPA)
+
+##Injection (CDI)
+
+##Rest Service (JAX-RS)
+
+###Async Rest endpoint
+
+###Server Sent Event (SSE)
+
+
 http://florent-dupont.blogspot.com/2014/01/arquillian-jpa-et-datasets-12-premiere.html
 http://florent-dupont.blogspot.com/2014/01/arquillian-jpa-et-datasets-22-utiliser.html
 
