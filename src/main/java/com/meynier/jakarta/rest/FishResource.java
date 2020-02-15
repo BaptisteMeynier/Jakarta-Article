@@ -3,6 +3,7 @@ package com.meynier.jakarta.rest;
 import com.meynier.jakarta.rest.param.FishTransactionParam;
 import com.meynier.jakarta.service.FishServiceImpl;
 
+import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -12,7 +13,6 @@ import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
@@ -32,7 +32,7 @@ public class FishResource {
     @Inject
     private FishServiceImpl fishService;
 
-    @Inject
+    @Resource(name="concurrent/__defaultManagedExecutorService")
     private Executor executor;
 
     @GET

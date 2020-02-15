@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,7 +21,7 @@ public class Family implements Serializable {
     @NotNull
     @Column(name="WATER_TYPE")
     private WaterType waterType;
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="family")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="family")
     private Collection<Fish> fishs;
 
     public Family() {

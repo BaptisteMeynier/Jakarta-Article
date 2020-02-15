@@ -1,23 +1,26 @@
 package com.meynier.jakarta.repository;
 
-import com.meynier.jakarta.domain.Family;
-import com.meynier.jakarta.domain.Fish;
-import com.meynier.jakarta.domain.Shop;
-import com.meynier.jakarta.domain.Stock;
+import com.meynier.jakarta.domain.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
+import javax.persistence.QueryHint;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
+import java.util.HashMap;
+import java.util.Map;
 
 @Named
 @ApplicationScoped
 public class ShopRepository {
+
+    private final static String FETCHGRAPH = "javax.persistence.fetchgraph";
 
     private EntityManager entityManager;
 

@@ -1,5 +1,0 @@
-FROM payara/server-full
-
-EXPOSE 8080 4848
-
-COPY target/jakarta-article.war $DEPLOY_DIR

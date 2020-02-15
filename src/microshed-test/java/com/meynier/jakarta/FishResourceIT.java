@@ -11,20 +11,18 @@ import org.microshed.testing.testcontainers.ApplicationContainer;
 import org.testcontainers.junit.jupiter.Container;
 
 
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 @MicroShedTest
-@Disabled
 public class FishResourceIT {
 
-    private final static String CONTEXT_APPLICATION = "jakarta-article";
+    private final static String CONTEXT_APPLICATION = "jakarta-article/petshop";
 
     @Container
-    public static ApplicationContainer app = new ApplicationContainer("jakarta-article:1.0.0")
+    public static ApplicationContainer app = new ApplicationContainer("jakarta-article:latest")
             .withAppContextRoot(CONTEXT_APPLICATION);
 
     @RESTClient

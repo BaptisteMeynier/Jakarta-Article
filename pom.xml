@@ -18,7 +18,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <payara.version>5.194</payara.version>
-        <microshed.version>0.6.2</microshed.version>
+        <microshed.version>0.7.1</microshed.version>
     </properties>
 
     <dependencyManagement>
@@ -155,6 +155,32 @@
             </testResource>
         </testResources>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>integration-test</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>docker</executable>
+                    <!-- optional -->
+                    <!--workingDirectory>${project.basedir}</workingDirectory-->
+                    <arguments>
+                        <argument>build</argument>
+                        <argument>-t</argument>
+                        <argument>jakarta-article:latest</argument>
+                        <argument>-f</argument>
+                        <argument>src/microshed-test/docker/Dockerfile</argument>
+                        <argument>.</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>

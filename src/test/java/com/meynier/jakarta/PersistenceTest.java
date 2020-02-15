@@ -1,10 +1,7 @@
 package com.meynier.jakarta;
 
 
-import com.meynier.jakarta.domain.Family;
-import com.meynier.jakarta.domain.Fish;
-import com.meynier.jakarta.domain.Shop;
-import com.meynier.jakarta.domain.Stock;
+import com.meynier.jakarta.domain.*;
 import com.meynier.jakarta.repository.ShopRepository;
 import org.junit.jupiter.api.*;
 
