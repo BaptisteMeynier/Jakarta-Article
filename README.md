@@ -6,13 +6,43 @@ You would find also some technicals to test your application.
 
 ##Pesistence (JPA)
 
+###Native query
+
+###Hql query
+
+###Criteria query
+
+###Graph Query
+
 ##Injection (CDI)
 
+###Service
+
+###Producer
+
+###Delegator
+
 ##Rest Service (JAX-RS)
+
+###Rest endpoint
 
 ###Async Rest endpoint
 
 ###Server Sent Event (SSE)
+
+# How test a Jakarta ee application ?
+
+## By instantiate directly the differents container
+
+## Mockito
+
+## HK2
+
+## Arquillian
+
+## JUnit Weld Extension
+
+## Microshed
 
 
 http://florent-dupont.blogspot.com/2014/01/arquillian-jpa-et-datasets-12-premiere.html
