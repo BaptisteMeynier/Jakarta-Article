@@ -4,31 +4,31 @@ This application is a showcase of some Jakarta ee 8 features.
 I use Payara Fish micro serveur but I could take an other Jakarta ee server implementation like Open Liberty, Wildfly, Glassfish.
 You would find also some technicals to test your application.
 
-##Pesistence (JPA)
+## Pesistence (JPA)
 
-###Native query
+### Native query
 
-###Hql query
+### Hql query
 
-###Criteria query
+### Criteria query
 
-###Graph Query
+### Graph Query
 
-##Injection (CDI)
+## Injection (CDI)
 
-###Service
+### Service
 
-###Producer
+### Producer
 
-###Delegator
+### Delegator
 
-##Rest Service (JAX-RS)
+## Rest Service (JAX-RS)
 
-###Rest endpoint
+### Rest endpoint
 
-###Async Rest endpoint
+### Async Rest endpoint
 
-###Server Sent Event (SSE)
+### Server Sent Event (SSE)
 
 # How test a Jakarta ee application ?
 
