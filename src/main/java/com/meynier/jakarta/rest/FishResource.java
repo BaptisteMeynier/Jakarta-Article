@@ -37,8 +37,8 @@ public class FishResource {
 
     @GET
     @Path("{fishFamily}")
-    public int countByType(@NotBlank @PathParam("fishFamily") String fishFamily) {
-        return fishService.countByType(fishFamily);
+    public int countByFamily(@NotBlank @PathParam("fishFamily") String fishFamily) {
+        return fishService.countByFamily(fishFamily);
     }
 
     @POST

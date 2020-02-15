@@ -2,7 +2,7 @@ package com.meynier.jakarta.service;
 
 public interface FishService {
 
-    int countByType(String fishFamily);
+    int countByFamily(String fishFamily);
 
     float buy(String shopName, String fishName, int quantity);
 

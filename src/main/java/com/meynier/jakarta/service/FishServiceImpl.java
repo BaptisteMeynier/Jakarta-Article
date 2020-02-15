@@ -22,7 +22,7 @@ public class FishServiceImpl implements FishService {
     @Inject
     private ShopRepository shopRepository;
 
-    public int countByType(String fishFamily) {
+    public int countByFamily(String fishFamily) {
         return shopRepository.countFishByFamily(fishFamily);
     }
 

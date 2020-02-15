@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "87d6a864-9506-4c40-b9cb-76f3da093d4e",
+		"name": "article",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "buyFish",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "shopName",
+							"value": "Magic Fish",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/jakarta-article/petshop/fish/Scalaire",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jakarta-article",
+						"petshop",
+						"fish",
+						"Scalaire"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countByFamily",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/jakarta-article/petshop/fish/Sphyrnidae",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jakarta-article",
+						"petshop",
+						"fish",
+						"Sphyrnidae"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sellFish",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/jakarta-article/petshop/fish/Scalaire;shopName=Magic Fish;quantity=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jakarta-article",
+						"petshop",
+						"fish",
+						"Scalaire;shopName=Magic Fish;quantity=1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

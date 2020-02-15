@@ -19,7 +19,7 @@ import static org.hamcrest.core.Is.is;
 @MicroShedTest
 public class FishResourceIT {
 
-    private final static String CONTEXT_APPLICATION = "jakarta-article/petshop";
+    private final static String CONTEXT_APPLICATION = "jakarta-article";
 
     @Container
     public static ApplicationContainer app = new ApplicationContainer("jakarta-article:latest")

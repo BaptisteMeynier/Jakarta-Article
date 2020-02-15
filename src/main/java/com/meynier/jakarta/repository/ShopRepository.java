@@ -20,8 +20,6 @@ import java.util.Map;
 @ApplicationScoped
 public class ShopRepository {
 
-    private final static String FETCHGRAPH = "javax.persistence.fetchgraph";
-
     private EntityManager entityManager;
 
     public ShopRepository() {

@@ -4,7 +4,6 @@ import com.meynier.jakarta.config.EntityManagerConfigurator;
 import com.meynier.jakarta.domain.Family;
 import com.meynier.jakarta.domain.Fish;
 import com.meynier.jakarta.domain.enums.WaterType;
-import com.meynier.jakarta.event.StockEvent;
 import com.meynier.jakarta.repository.ShopRepository;
 import org.arquillian.ape.api.UsingDataSet;
 import org.arquillian.ape.rdbms.ShouldMatchDataSet;
@@ -45,7 +44,7 @@ public class ShopRepositoryIT {
     @Test
     @InSequence(0)
     @UsingDataSet("datasets/fish.yml")
-    public void it_should_find_fish_for_family() throws Exception {
+    public void it_should_find_fish_for_family() {
         //GIVEN
         String familyName = "Cichlidae";
         //WHEN
@@ -59,7 +58,7 @@ public class ShopRepositoryIT {
     @Test
     @InSequence(1)
     @ShouldMatchDataSet(value= "datasets/expected-fish.yml", excludeColumns="id")
-    public void it_should_persist_family_and_fishs() throws Exception {
+    public void it_should_persist_family_and_fishs() {
         //GIVEN
         Fish shark1 = new Fish();
         shark1.setName("Requin marteau");
