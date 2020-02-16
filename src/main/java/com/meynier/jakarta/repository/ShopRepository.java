@@ -34,7 +34,7 @@ public class ShopRepository {
     //----- NATIVE QUERY -----//
 
     public Shop findShopByName(String shopName) {
-        return (Shop)entityManager.createNativeQuery(String.format("select * from Shop where name = '%s'", shopName),Shop.class)
+        return (Shop) entityManager.createNativeQuery(String.format("select * from Shop where name = '%s'", shopName),Shop.class)
                 .setParameter("name", shopName)
                 .getSingleResult();
     }
